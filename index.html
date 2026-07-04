@@ -201,7 +201,7 @@ footer span{color:var(--cyan)}
 @media(max-width:900px){.about-grid,.edu-layout{grid-template-columns:1fr;gap:3rem}.project-card.featured{grid-column:span 1;grid-template-columns:1fr}.project-card.featured .project-aside{min-width:unset}}
 @media(max-width:768px){nav{padding:1rem 1.5rem}.nav-links,.nav-cta{display:none}section{padding:5.5rem 0}.hero-stats{gap:2rem}.ielts-card{gap:2rem}}
 @media(max-width:480px){.projects-grid,.skills-grid{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}.blob{display:none}}
+/* @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}.blob{display:none}} */
 </style>
 </head>
 <body>
@@ -450,11 +450,11 @@ if(typeof CERT_IMAGES !== 'undefined' && CERT_IMAGES.ielts){window.CERT_IMAGES =
 </script>
 <script>
 const CERT_DATA=[
-  {key:'ibm',name:'Artificial Intelligence Fundamentals',issuer:'IBM SkillsBuild',img:'IBM Skillsbuild (Badge) - Artificial Intelligence Fundamentals.png'},
-  {key:'aws_p',name:'Foundations of Prompt Engineering',issuer:'AWS Training & Certification',img:'AWS Training & Certification - Foundations of Prompt Engineering.jpg'},
-  {key:'aws_m',name:'Fundamentals of Machine Learning and AI',issuer:'AWS Training & Certification',img:'AWS Training & Certification - Fundamentals of Machine Learning and Artificial Intelligence.jpg'},
-  {key:'alibaba',name:'Alibaba Cloud Certification',issuer:'Alibaba Cloud',img:'Alibaba Cloud Certification - Delroy.png'},
-  {key:'db',name:'Generative AI Fundamentals',issuer:'Databricks',img:'Databrick (Badge) - Generative AI Fundamentals - Delroy.png'},
+  {key:'ibm',name:'Artificial Intelligence Fundamentals',issuer:'IBM SkillsBuild',img:CERT_IMAGES.ibm},
+  {key:'aws_p',name:'Foundations of Prompt Engineering',issuer:'AWS Training & Certification',img:CERT_IMAGES.aws_prompt},
+  {key:'aws_m',name:'Fundamentals of Machine Learning and AI',issuer:'AWS Training & Certification',img:CERT_IMAGES.aws_ml},
+  {key:'alibaba',name:'Alibaba Cloud Certification',issuer:'Alibaba Cloud',img:CERT_IMAGES.alibaba},
+  {key:'db',name:'Generative AI Fundamentals',issuer:'Databricks',img:CERT_IMAGES.databricks},
   {key:'ms',name:'Career Essentials in Generative AI',issuer:'Microsoft & LinkedIn',img:CERT_IMAGES.ms,pdf:'Career Essentials in Generative AI by Microsoft and LinkedIn.pdf'},
   
 ];
