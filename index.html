@@ -7,7 +7,7 @@
 <title>Delroy — Machine Learning, AI, Database & IoT</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Exo:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <style>
 :root{
@@ -202,6 +202,66 @@ footer span{color:var(--cyan)}
 @media(max-width:768px){nav{padding:1rem 1.5rem}.nav-links,.nav-cta{display:none}section{padding:5.5rem 0}.hero-stats{gap:2rem}.ielts-card{gap:2rem}}
 @media(max-width:480px){.projects-grid,.skills-grid{grid-template-columns:1fr}}
 /* @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}.blob{display:none}} */
+
+/* --- AI-NATIVE THEME OVERRIDES --- */
+:root {
+  --bg-void: #05050A;
+  --bg-base: #0A0A14;
+  --bg-card: rgba(20, 20, 30, 0.4);
+  --bg-glass: rgba(15, 15, 25, 0.55);
+  --cyan: #00e5ff;
+  --cyan-dim: rgba(0, 229, 255, 0.15);
+  --cyan-glow: rgba(0, 229, 255, 0.3);
+  --violet: #7c3aed;
+  --violet-dim: rgba(124, 58, 237, 0.15);
+  --violet-glow: rgba(124, 58, 237, 0.3);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+#three-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Glassmorphism & Interaction Overrides */
+.project-card {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 0.3s, box-shadow 0.3s !important;
+}
+.skill-group {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), border-color 0.25s !important;
+}
+.btn-primary, .btn-outline, .nav-cta {
+  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), background 0.2s, box-shadow 0.2s, color 0.2s, border-color 0.2s !important;
+}
+
+.btn-primary:active, .btn-outline:active, .nav-cta:active, .project-card:active, .skill-group:active {
+  transform: scale(0.97) !important;
+}
+
+/* Updated reveal logic */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(4px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out), filter 0.8s var(--ease-out);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
 </style>
 </head>
 <body>
@@ -218,11 +278,12 @@ footer span{color:var(--cyan)}
     <li><a href="#education">Education</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <a href="mailto:delroydelroy05@gmail.com" class="nav-cta" id="nav-cta">Get in Touch</a>
+  <a href="mailto:delroydelroy05@gmail.com" class="nav-cta" data-magnetic="true" id="nav-cta">Get in Touch</a>
 </nav>
 
 <!-- HERO -->
 <section id="hero" aria-labelledby="hero-h">
+  <canvas id="three-canvas" aria-hidden="true"></canvas>
   <canvas id="three-canvas" aria-hidden="true"></canvas>
   <div class="hero-content">
     <div class="hero-eyebrow" role="text">
@@ -232,8 +293,8 @@ footer span{color:var(--cyan)}
     <p class="hero-role">Reinforcement Learning &nbsp;&middot;&nbsp; Database and IoT &nbsp;&middot;&nbsp; Autonomous Systems</p>
     <p class="hero-desc">Computer Science student at BINUS University building RL agents for autonomous vehicles, conducting IEEE-targeted research, and solving real-world problems with deep learning.</p>
     <div class="hero-ctas">
-      <a href="#projects" class="btn-primary" id="hero-work">View My Work</a>
-      <a href="#contact" class="btn-outline" id="hero-contact">Get in Touch</a>
+      <a href="#projects" class="btn-primary" data-magnetic="true" id="hero-work">View My Work</a>
+      <a href="#contact" class="btn-outline" data-magnetic="true" id="hero-contact">Get in Touch</a>
     </div>
     <div class="hero-stats" role="list" aria-label="Key stats">
       <div class="stat-item" role="listitem"><div class="stat-val">3.46</div><div class="stat-label">GPA / 4.00</div></div>
@@ -289,7 +350,7 @@ footer span{color:var(--cyan)}
     </div>
     <div class="projects-grid">
       <!-- Featured -->
-      <article class="project-card featured reveal">
+      <article class="project-card featured reveal" data-magnetic="true">
         <div class="project-main">
           <div class="project-badge"><svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>Pre-Thesis Research &middot; 2025 &ndash; Present</div>
           <div><div class="project-title">Deep RL for Autonomous Racing</div><div class="project-sub">Targeting IEEE-Format Publication</div></div>
@@ -305,15 +366,15 @@ footer span{color:var(--cyan)}
         </div>
       </article>
       <!-- Personal Finance Tracker -->
-      <article class="project-card reveal">
+      <article class="project-card reveal" data-magnetic="true">
         <div class="project-badge"><svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>App Development &middot; 2026 &ndash; Present</div>
         <div><div class="project-title">Personal Finance Tracker</div><div class="project-sub">Privacy-First Offline Finance Management</div></div>
-        <p class="project-desc">Built a 100% offline, privacy-first personal finance tracking desktop application using Electron and SQLite, enabling secure local data management without reliance on cloud storage. Currently developing an Android version for public release.</p>
-        <div class="project-tags"><span class="tag">Electron</span><span class="tag">SQLite</span><span class="tag">Android</span><span class="tag">Chart.js</span></div>
+        <p class="project-desc">Built a 100% offline, privacy-first personal finance tracking application using SQLite for secure local data management. Successfully built an .exe desktop application using Electron, an .apk for Android using Android Studio, and a PWA system for iOS.</p>
+        <div class="project-tags"><span class="tag">Electron</span><span class="tag">SQLite</span><span class="tag">Android Studio</span><span class="tag">PWA</span><span class="tag">Chart.js</span></div>
         <a href="https://github.com/D-L-R-Y/PersonalFinanceDB" class="project-link" target="_blank" rel="noopener noreferrer">github.com/D-L-R-Y/PersonalFinanceDB<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </article>
       <!-- CV -->
-      <article class="project-card reveal">
+      <article class="project-card reveal" data-magnetic="true">
         <div class="project-badge violet"><svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>Computer Vision &middot; 2024</div>
         <div><div class="project-title">3D Object Detection for AVs</div><div class="project-sub">Modified YOLO3D Framework</div></div>
         <p class="project-desc">Developed a real-time 3D object detection pipeline by fusing YOLOv11 with Depth Anything v2, creating a novel monocular YOLO3D framework for autonomous driving perception without LiDAR hardware.</p>
@@ -321,7 +382,7 @@ footer span{color:var(--cyan)}
         <a href="https://drive.google.com/file/d/1NMqMhRe7YewKYMpNI8w1xTdmqYpRCg8c/view" class="project-link" target="_blank" rel="noopener noreferrer">Read the Paper<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </article>
       <!-- Illuma -->
-      <article class="project-card reveal">
+      <article class="project-card reveal" data-magnetic="true">
         <div class="project-badge"><svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>AIoT &middot; 2026</div>
         <div><div class="project-title">Illuma &mdash; Smart Streetlight RL</div><div class="project-sub">AIoT-Enabled Adaptive Lighting</div></div>
         <p class="project-desc">Built a PyTorch DQN agent with a custom Gymnasium + SUMO/TraCI environment to autonomously optimize street light brightness across randomized traffic scenarios.</p>
@@ -330,7 +391,7 @@ footer span{color:var(--cyan)}
         <a href="https://github.com/D-L-R-Y/SmartStreetLightRL" class="project-link" target="_blank" rel="noopener noreferrer">github.com/D-L-R-Y/SmartStreetLightRL<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
       </article>
       <!-- Greenhouse -->
-      <article class="project-card reveal">
+      <article class="project-card reveal" data-magnetic="true">
         <div class="project-badge emerald"><svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>IoT &middot; 2026</div>
         <div><div class="project-title">Smart Greenhouse IoT Agent</div><div class="project-sub">Autonomous Climate Control via RL</div></div>
         <p class="project-desc">Designed and benchmarked Q-Learning vs DQN reinforcement learning agents to autonomously manage greenhouse climate control in stochastic environments.</p>
@@ -350,19 +411,19 @@ footer span{color:var(--cyan)}
       <h2 class="section-title" id="skills-h">Technical <span class="title-accent">Toolkit</span></h2>
     </div>
     <div class="skills-grid">
-      <div class="skill-group reveal">
+      <div class="skill-group reveal" data-magnetic="true">
         <div class="sg-header"><div class="sg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4"/><path d="M8 10a4 4 0 0 0-4 4v2h2"/><path d="M16 10a4 4 0 0 1 4 4v2h-2"/><path d="M12 10v10"/><path d="M8 20h8"/></svg></div><div class="sg-title">AI &amp; Machine Learning</div></div>
         <div class="skill-pills"><span class="skill-pill">Reinforcement Learning</span><span class="skill-pill">Deep Learning</span><span class="skill-pill">Machine Learning</span><span class="skill-pill">Computer Vision</span><span class="skill-pill">NLP</span><span class="skill-pill">Generative AI</span><span class="skill-pill">Responsible AI</span></div>
       </div>
-      <div class="skill-group reveal">
+      <div class="skill-group reveal" data-magnetic="true">
         <div class="sg-header"><div class="sg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div><div class="sg-title">Frameworks &amp; Libraries</div></div>
-        <div class="skill-pills"><span class="skill-pill">PyTorch</span><span class="skill-pill">Gymnasium</span><span class="skill-pill">SUMO / TraCI</span><span class="skill-pill">TMRL</span><span class="skill-pill">YOLOv11</span><span class="skill-pill">Depth Anything v2</span></div>
+        <div class="skill-pills"><span class="skill-pill">PyTorch</span><span class="skill-pill">Gymnasium</span><span class="skill-pill">SUMO / TraCI</span><span class="skill-pill">TMRL</span><span class="skill-pill">YOLOv11</span><span class="skill-pill">Depth Anything v2</span><span class="skill-pill">Electron</span><span class="skill-pill">Android Studio</span><span class="skill-pill">PWA</span></div>
       </div>
-      <div class="skill-group reveal">
+      <div class="skill-group reveal" data-magnetic="true">
         <div class="sg-header"><div class="sg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="sg-title">Cloud &amp; Infrastructure</div></div>
         <div class="skill-pills"><span class="skill-pill">AWS</span><span class="skill-pill">Alibaba Cloud</span><span class="skill-pill">Cloud Computing</span><span class="skill-pill">Cloud Applications</span><span class="skill-pill">Cybersecurity</span></div>
       </div>
-      <div class="skill-group reveal">
+      <div class="skill-group reveal" data-magnetic="true">
         <div class="sg-header"><div class="sg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div><div class="sg-title">IoT &amp; Data</div></div>
         <div class="skill-pills"><span class="skill-pill">Internet of Things (IoT)</span><span class="skill-pill">AIoT</span><span class="skill-pill">Data Science</span><span class="skill-pill">Prompt Engineering</span><span class="skill-pill">AI Literacy</span><span class="skill-pill">Chatbots</span></div>
       </div>
@@ -551,6 +612,88 @@ const ieltsImg=document.getElementById('ielts-cert-img');
 if(window.CERT_IMAGES&&window.CERT_IMAGES.ielts){ieltsImg.src=window.CERT_IMAGES.ielts;}
 </script>
 
+
+
+<script>
+// Magnetic Hover Logic
+document.querySelectorAll('[data-magnetic="true"]').forEach(elem => {
+  elem.addEventListener('mousemove', (e) => {
+    const rect = elem.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    elem.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+  });
+  elem.addEventListener('mouseleave', () => {
+    elem.style.transform = 'translate(0px, 0px)';
+  });
+});
+
+// Three.js Network Particles
+if (typeof THREE !== 'undefined') {
+  const canvas = document.getElementById('three-canvas');
+  if (canvas) {
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(window.devicePixelRatio);
+
+      const particlesGeometry = new THREE.BufferGeometry();
+      const particlesCount = 250;
+      const posArray = new Float32Array(particlesCount * 3);
+
+      for(let i = 0; i < particlesCount * 3; i++) {
+          posArray[i] = (Math.random() - 0.5) * 15;
+      }
+      particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+      const material = new THREE.PointsMaterial({
+          size: 0.04,
+          color: 0x7c3aed,
+          transparent: true,
+          opacity: 0.8,
+          blending: THREE.AdditiveBlending
+      });
+
+      const particlesMesh = new THREE.Points(particlesGeometry, material);
+      scene.add(particlesMesh);
+
+      camera.position.z = 4;
+
+      let mouseX = 0;
+      let mouseY = 0;
+      let targetX = 0;
+      let targetY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+          mouseX = (e.clientX / window.innerWidth) - 0.5;
+          mouseY = (e.clientY / window.innerHeight) - 0.5;
+      });
+
+      window.addEventListener('resize', () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+
+      function animate() {
+          requestAnimationFrame(animate);
+          
+          targetX = mouseX * 1.5;
+          targetY = mouseY * 1.5;
+          
+          particlesMesh.rotation.y += 0.002;
+          particlesMesh.rotation.x += 0.001;
+          
+          particlesMesh.position.x += (targetX - particlesMesh.position.x) * 0.05;
+          particlesMesh.position.y += (-targetY - particlesMesh.position.y) * 0.05;
+          
+          renderer.render(scene, camera);
+      }
+      animate();
+  }
+}
+</script>
 
 </body>
 </html>
